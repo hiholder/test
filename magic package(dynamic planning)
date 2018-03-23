@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+
+public class 神奇口袋 {
+
+	/**
+	 * @param args
+	 */
+	static int[] a=new int[30];
+	static int N;
+	static int[][] Way=new int[50][40];
+	static void f(int[][] way,int[] num)
+	{
+		for(int w=1;w<=40;w++)//根据数组a填充动规数组，数组必须填充完全才可以起作用
+		for(int i=1;i<=N;++i)
+		{
+			way[w][i]+=way[w][i-1];//没有取a[i]
+			if(w>=num[i])way[w][i]+=way[w-num[i]][i-1];//如果w即递归重量大于第i个物体重量，则使用动规数组
+		}
+	}
+	public static void main(String[] args) {
+		// TODO 自动生成的方法存根
+Scanner in=new Scanner(System.in);
+//N=in.nextInt();
+N=3;
+for(int i=1;i<=N;++i)
+{
+	a[i]=20;//in.nextInt();
+	Way[0][i]=1;//为动规数组赋初值
+}
+Way[0][0]=1;
+f(Way,a);
+
+System.out.println(Way[40][N]);
+	}
+
+}
